@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_push.c                                         :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 12:06:53 by yilin             #+#    #+#             */
-/*   Updated: 2024/06/27 14:01:53 by yilin            ###   ########.fr       */
+/*   Created: 2024/07/02 16:28:11 by yilin             #+#    #+#             */
+/*   Updated: 2024/07/02 18:54:56 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+//IN LIBFT: ft_isdigit
 
-
-//lst_push
-void	lstpush(t_list a, t_list b)
+/*is stack sorted*/
+int	is_stack_sorted(t_stack **stack)
 {
 	
 }
 
-//pa
-void	pa(t_list a, t_list b)
-{
-	write(1, "pa\n", 1);	
-}
-//pb
-void	pb(t_list a, t_list b)
-{
-	write(1, "pb\n", 1);
-}
+/*is arg in range*/
+is_arg_in_range(i, check_range, a, allocated_av)

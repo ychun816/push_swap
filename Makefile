@@ -6,7 +6,7 @@
 #    By: yilin <yilin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 16:20:33 by yilin             #+#    #+#              #
-#    Updated: 2024/06/27 19:09:43 by yilin            ###   ########.fr        #
+#    Updated: 2024/06/28 15:17:30 by yilin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,24 @@ COLOR_RESET = \033[0m
 COLOR_PINKB = \033[1;95m
 COLOR_REDB = \033[1;91m
 
+### TARGET FILE ###
 NAME = push_swap
-
-
 OBJS = $(SRCS:.c=.o)
+
+### LIBFT ###
+LIBFT_PATH = libft/
+LIBFT = $(LIBFT_PATH)libft.a
+
+### COMPILE AND CLEAN ###
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
 AR = ar rcs
 RM = rm rf
-### for libft###
-LIBFT_PATH = libft/
-LIBFT = $(LIBFT_PATH)libft.a
 
+### BUILD FILES ###
 all: $(NAME)
 	@echo "$(COLOR_PINKB)🦄ALL DONE🦄$(COLOR_RESET)"
 
-## compile libft
 libft:
 	$(MAKE) -C $(LIBFT_PATH)
 

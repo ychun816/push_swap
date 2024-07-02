@@ -6,12 +6,13 @@
 #    By: yilin <yilin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 11:22:23 by yilin             #+#    #+#              #
-#    Updated: 2024/06/27 21:31:13 by yilin            ###   ########.fr        #
+#    Updated: 2024/06/28 14:00:54 by yilin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_PINKB = \033[1;95m
 COLOR_REDB = \033[1;91m
+COLOR_RESET = \033[0m
 
 ### LIB NAME ###
 NAME = libft.a
@@ -96,7 +97,7 @@ all: $(NAME)
 	@echo "$(COLOR_PINKB)🦄ALL DONE🦄$(COLOR_RESET)"
 
 $(NAME): $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 	@echo "$(COLOR_PINKB)✨COMPILATION DONE✨$(COLOR_RESET)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
