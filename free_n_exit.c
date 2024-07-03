@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:36:55 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/02 18:50:18 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:42:26 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	free_stack(t_stack **stack)
 /*exit program*/
 void	exit_program(char	**array, char *error_msg)
 {
+	(void)error_msg; // Suppress unused parameter warning for error_msg
 	/*If `array` is not NULL, free the memory it points to*/
 	if (array)
 		free(array);

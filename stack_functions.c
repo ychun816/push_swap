@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:42:38 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/02 19:37:16 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/03 18:19:04 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	ft_atol(const char *str, int *range)
 	i = 0;
 	nb = 0;
 	sign = 1;
-	/*Assume valid input initially*/
-	range = 1; 
+	range = 1; /*Assume valid input initially*/
 
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
@@ -47,15 +46,62 @@ int	ft_atol(const char *str, int *range)
 	return (nb * sign);
 }
 
-//stackadd back (node)
-void	ft_stackadd_back(t_stack *node, int nb)
-{
-
-}
-
-
 //ft_stacklen
 int	ft_stacklen(t_stack **stack)
 {
+	int	i;
+
+	i = 0;
+	while (stack)
+	{
+		i++;
+		stack = stack->next;	
+	}
+	return (i);
+}
+
+void	ft_stackadd_back(t_stack **stack, int nb)
+{
+	t_stack *tmp;
+
+	if (!node)
+		return ;
+	if (!)
 	
+
+}
+/*ref
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*temp;
+
+	if (!lst || !new)
+		return ;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	temp = *lst;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
+}
+*/
+void	free_stack(t_stack **stack)
+{
+	t_stack	*index;
+	t_stack	*tmp;
+
+	if (!stack)
+		return ;
+	index = *stack; /*initialize index*/
+	while (index)
+	{
+		tmp = index->content;
+		index->content = 0; /*Clear data to protect sensitive information*/
+		free(tmp);
+		index = index->next; /*loop*/
+	}
+	*stack = NULL;
 }

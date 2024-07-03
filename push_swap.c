@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   !push_swap.c                                       :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:27:33 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/02 18:56:27 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/03 18:49:46 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ int	main(int ac, char *av[])
 	// else if (ac == 2)
 	// 	av = ft_split(av[1], ' ');
 	/*create stack a*/
-	a = av_to_stack(ac, av, a); ///
+	a = avs_to_stack(ac, av, a); ///
 	//check if stack a in order => no need sort => free
 	if (!is_stack_sorted(a))
 	{
