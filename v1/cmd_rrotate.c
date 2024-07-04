@@ -6,11 +6,12 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:01 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/01 15:24:21 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 17:24:47 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/includes/libft.h"
 
 /*
 (1)Get last_node

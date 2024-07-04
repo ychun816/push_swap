@@ -6,11 +6,12 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:04 by yilin             #+#    #+#             */
-/*   Updated: 2024/06/29 20:58:48 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 11:44:30 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/includes/libft.h"
 
 //sa
 void	sa(t_stack **a)
@@ -45,7 +46,7 @@ void	sb(t_stack **b)
 void	ss(t_stack **a, t_stack **b)
 {
 	t_stack	tmp_content1;
-	t_stack	tmp_content_2;
+	t_stack	tmp_content2;
 
 	if (!a || !(*a) || !(*a)->next)
 		return ;

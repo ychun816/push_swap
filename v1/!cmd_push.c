@@ -6,12 +6,13 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:06:53 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/03 18:33:04 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 11:35:36 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <unistd.h>
+#include "libft/includes/libft.h"
+
 /*
 typedef struct s_stack
 {

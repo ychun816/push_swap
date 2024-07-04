@@ -6,7 +6,7 @@
 #    By: yilin <yilin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 11:22:23 by yilin             #+#    #+#              #
-#    Updated: 2024/06/28 14:00:54 by yilin            ###   ########.fr        #
+#    Updated: 2024/07/04 11:41:53 by yilin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ TO_DIR     = $(SRCS_DIR)ft_to/ft_atoi.c \
              $(SRCS_DIR)ft_to/ft_itoa.c \
              $(SRCS_DIR)ft_to/ft_tolower.c \
              $(SRCS_DIR)ft_to/ft_toupper.c
+#int	ft_atol.c
 
 PRINTF_DIR = $(SRCS_DIR)ft_printf/ft_printf.c \
              $(SRCS_DIR)ft_printf/ft_put_char.c \

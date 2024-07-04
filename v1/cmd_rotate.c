@@ -6,11 +6,12 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:06:57 by yilin             #+#    #+#             */
-/*   Updated: 2024/06/29 20:46:39 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 11:35:43 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/includes/libft.h"
 
 /*
 //Initial List

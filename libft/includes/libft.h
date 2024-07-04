@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:04:48 by yilin             #+#    #+#             */
-/*   Updated: 2024/06/27 19:05:52 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 11:41:06 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <limits.h> /*for ft_atol later*/
 
 typedef struct s_list
 {
@@ -65,5 +66,6 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
+/*int	ft_atol(const char *str, int *range)*/
 
 #endif

@@ -6,10 +6,12 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:35:05 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/02 12:35:59 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/04 11:36:14 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+#include "libft/includes/libft.h"
 
 //
 sort_three_small(stack_len, &a);
