@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:44:49 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/04 20:00:54 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/05 15:14:09 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 stack structure:
 head -> [data | next] -> [data | next] -> [data | NULL]
 */
-t_stack	ft_stack_last(t_stack *stack)
+t_stack	ft_node_last(t_stack *node)
 {
-	if (!stack)
+	if (!node)
 		return (NULL);
-	while (stack->next)
-		stack = stack->next;
-	return (stack);
+	while (node->next)
+		node = node->next;
+	return (node);
 }
 
 /*update current position*/
-void	ft_current_position(t_stack *stack)
+void	ft_node_current_pos(t_stack *stack)
 {
 	int	i;
 	t_stack	*current;
@@ -56,3 +56,10 @@ int	ft_stacklen(t_stack **stack)
 	}
 	return (len);
 }
+
+/*ft__cheapest*/
+
+/*init_node_a: prepare nodes to push "a" to "b"*/
+
+/*init_node_b: prepare nodes to push "b" to "a"*/
+

@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:06:57 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/04 19:52:51 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/05 16:03:42 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,21 @@ void	rotate(t_stack **stack)
 }
 
 //ra
-void	ra(t_stack **a)
+void	ra(t_stack **a) TODO: //if to add boolean?
 {
 	rotate(a);
 	ft_printf("ra\n");
 }
 
 //rb
-void	rb(t_stack **b)
+void	rb(t_stack **b) TODO: //if to add boolean?
 {
 	rotate(b);
 	ft_printf("rb\n");
 }
 
 //rr
-void	rr(t_stack **a, t_stack **b)
+void	rr(t_stack **a, t_stack **b) TODO: //if to add boolean?
 {
 	rotate(a);
 	rotate(b);

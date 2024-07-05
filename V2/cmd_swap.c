@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:04 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/04 19:42:19 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:56:33 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ void	swap(t_stack **stack)
 }
 
 /*sa*/
-void	sa(t_stack **a)
+void	sa(t_stack **a) TODO: //if to add boolean?
 {
 	swap(a);
 	ft_printf("sa\n");
 }
 
 /*sb*/
-void	sb(t_stack **b)
+void	sb(t_stack **b) TODO: //if to add boolean?
 {
 	swap(b);
 	ft_printf("sb\n");
 }
 
 //ss
-void	ss(t_stack **a, t_stack **b)
+void	ss(t_stack **a, t_stack **b) TODO: //if to add boolean?
 {
 	swap(a);
 	swap(b);

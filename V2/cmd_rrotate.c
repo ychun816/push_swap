@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:01 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/04 19:53:26 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:56:27 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ void	rrotate(t_stack **stack)
 }
 
 //rra: last node become first
-void	rra(t_stack **a)
+void	rra(t_stack **a) TODO: //if to add boolean?
 {
 	rrotate(a);
 	ft_printf("rra\n");
 }
 
 //rrb: last node become first
-void	rrb(t_stack **b)
+void	rrb(t_stack **b) TODO: //if to add boolean?
 {
 	rrotate(b);
 	ft_printf("rrb\n");
 }
 
 //rrr: rra and rrb at the same time
-void	rrr(t_stack **stack)
+void	rrr(t_stack **stack) TODO: //if to add boolean?
 {
 	rrotate(a);
 	rrotate(b);
