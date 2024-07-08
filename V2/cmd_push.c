@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:06:53 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/05 10:55:36 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:06:52 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,25 @@ void	pb(t_stack a, t_stack b) TODO: //pb(t_stack_node **a, t_stack_node **b, boo
 	ft_printf("pb\n");
 }
 
-/*
 //prepare to push
-//check n move position
-void check_n_move(t_stack **stack, t_stack *first_node, char stack_name)
+void prep_for_push(t_stack **stack, t_stack *top_node, char stack_name)
 {
 	//if stack not first_node => operate on a & b
-	while (!stack && stack != first_node)
+	while (!stack && stack != top_node)
 	{
 		if (stack_name == 'a')
 		{
-			if (first_node->above_median) //boolean: first_node IS above meidan
-				ra(stack);
+			if (top_node->above_median) //boolean: top_node IS above meidan
+				ra(stack); TODO: OR: ra(stack, false);
 			else
-				rra(stack);
+				rra(stack); TODO: OR: rra(stack, false);
 		}
-		if (stack_name == 'b')
+		else if (stack_name == 'b')
 		{
-			if (first_node->above_median)
-				rb(stack);
+			if (top_node->above_median)
+				rb(stack); TODO: OR: rb(stack, false);
 			else
-				rrb(stack);
+				rrb(stack); TODO: OR: rrb(stack, false);
 		}
 	}
-}*/
+}

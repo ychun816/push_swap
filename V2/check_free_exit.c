@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:37:27 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/05 14:45:54 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/08 19:34:12 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/includes/libft.h"
 
 /*********CHECK*********/
+
 /***is stack sorted***/
 bool	is_stack_sorted(t_stack *stack)
 {
