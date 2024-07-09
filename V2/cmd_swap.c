@@ -6,41 +6,47 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:04 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 15:04:31 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:55:36 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/includes/libft.h"
-
+/*
+static void	swap(t_stack **stack)
+void	sa(t_stack **a)
+void	sb(t_stack **b)
+void	ss(t_stack **a, t_stack **b)
+*/
 /*swap*/
-void	swap(t_stack **stack)
+static void	swap(t_stack **stack) TODO: TODO: TODO:
 {
 	t_stack	tmp_content;
 
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;
-	tmp_content = (*stack)->content;
-	(*stack)->content = ((*stack)->next)->content;
-	((*stack)->next)->content = tmp_content;
+	
+	// tmp_content = (*stack)->content;
+	// (*stack)->content = ((*stack)->next)->content;
+	// ((*stack)->next)->content = tmp_content;
 }
 
 /*sa*/
-void	sa(t_stack **a) TODO: //if to add boolean?
+void	sa(t_stack **a)
 {
 	swap(a);
 	ft_printf("sa\n");
 }
 
 /*sb*/
-void	sb(t_stack **b) TODO: //if to add boolean?
+void	sb(t_stack **b)
 {
 	swap(b);
 	ft_printf("sb\n");
 }
 
 //ss
-void	ss(t_stack **a, t_stack **b) TODO: //if to add boolean?
+void	ss(t_stack **a, t_stack **b)
 {
 	swap(a);
 	swap(b);

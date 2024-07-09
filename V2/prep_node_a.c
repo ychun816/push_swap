@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_node_a.c                                    :+:      :+:    :+:   */
+/*   prep_node_a.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:20:37 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 19:35:20 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 18:12:20 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include "libft/includes/libft.h"
 
 //ft_current_position
-
 //set target a
-void	set_target_node_a(t_stack *a, t_stack *b) // Find `a` node's target in stack `b`
+static void	set_target_node_a(t_stack *a, t_stack *b) // Find `a` node's target in stack `b`
 {
 	t_stack	*current_b; // To store the pointer to the current node in stack `b` and iterate through each node following
 	t_stack *target_node; // To store the pointer to the target node in stack `b`
@@ -45,7 +44,7 @@ void	set_target_node_a(t_stack *a, t_stack *b) // Find `a` node's target in stac
 }
 
 //count_cost_a
-void	count_cost_a(t_stack *a, t_stack *b)
+static void	count_cost_a(t_stack *a, t_stack *b)
 {
 	int	a_len;
 	int	b_len;
@@ -53,8 +52,7 @@ void	count_cost_a(t_stack *a, t_stack *b)
 	//initialize a and b stack
 	a_len = ft_stacklen(a);
 	b_len = ft_stacklen(b);
-	//loop a 
-	while(a)
+	while(a) //loop a
 	{
 		// Assign the current `a` node's push cost, its index value
 		a->push_cost = a->content;
@@ -75,11 +73,11 @@ void	count_cost_a(t_stack *a, t_stack *b)
 }
 
 //init_node_a
-t_stack	handle_node_a(t_stack *a, t_stack *b)
+void	prep_node_a(t_stack *a_node, t_stack *b_node)
 {
-	ft_current_position(a);
-	ft_current_position(b);
-	set_target_node_a(a, b);
-	count_cost_a(a, b);
-	set_cheapest_node(a);
+	ft_current_position(a_node);
+	ft_current_position(b_node);
+	set_target_node_a(a_node, b_node);
+	count_cost_a(a_node, b_node);
+	set_cheapest_node(a_node);
 }

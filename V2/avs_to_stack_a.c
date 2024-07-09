@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:59:54 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 12:23:22 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:38:12 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atol(const char *str)
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
-		if (str == '-')
+		if (str[i] == '-')
 			sign = sign * (-1);	
 		i++;
 	}
@@ -38,42 +38,40 @@ int	ft_atol(const char *str)
 }
 
 /*avs_to_stack_a: (2-1)append_node- get last node*/
-t_stack	get_last_node(t_stack *node)
-{
-	if (!node)
-		return (NULL);
-	while (node->next)
-		node = node->next;
-	return (node);
-}
+
 /*avs_to_stack_a: (2-2)append_node- add_new_node*/
-t_stack	add_new_node(int content)
+void	add_new_node(t_stack *new_node, int content)
 {
-	t_stack	*new_node;
-	
-	new_node = (t_stack *)malloc(sizeof(t_stack));
+	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
-		return (NULL);
+		return ;
 	new_node->content = content;
-	new_node->prev = NULL;
+	// new_node->prev = NULL;
 	new_node->next = NULL;
-	return (new_node);
 }
 
 /*avs_to_stack_a: (2-3)append_node*/
-void	append_node(t_stack **stack, int content)
+static void	append_node(t_stack **stack, int content)
 {
 	t_stack *new_node;
 	t_stack	*last_node;
 	
 	if (!stack)
 		return ;
-	new_node = add_new_node(content);
-	if (!new_node)
-		return ;
-	last_node = get_last_node(*stack);
-	last_node->next = new_node; // Append the new node to the last node
-	new_node->prev = last_node;	 // Update the previous pointer of the new node
+	add_new_node(new_node, content);
+	// if (!new_node)
+	// 	return ;
+	if (!(*stack))
+	{
+		*stack = new_node; //if empty =>
+		new_node->prev = NULL;
+	}
+	else  //If the stack is not empty, it means there are existing nodes in the linked list
+	{
+		last_node = get_last_node(*stack);
+		last_node->next = new_node; // Append the new node to the last node
+		new_node->prev = last_node;	 // Update the previous pointer of the new node
+	}
 }
 
 /*avs_to_stack_a: (3)set_stack a*/
@@ -85,19 +83,18 @@ void	avs_to_stack_a(t_stack	**stack_a, char *avs[])
 	i = 0;
 	while(avs[i])
 	{
-		// Check for syntax errors in the argument => if error => exit
-		if (is_syntax_error(avs[i]))
-			exit_program(NULL, "error: syntax error"); TODO: //free_errors(a)
+		if (is_syntax_error(avs[i])) // Check for syntax errors in the argument => if error => exit
+			exit_program(NULL, "error: syntax error"); //TODO: //free_errors(a)
 		//convert args to long integer
-		converted_int = ft_atol((const char)avs[i]);
+		converted_int = ft_atol((const char *)avs[i]);
 		//Check for overflow (value out of int range) INT_MIN & INT MAX => if error=>exit
 		if (converted_int < INT_MIN || converted_int > INT_MAX)
-			exit_program(NULL, "error: overflow"); TODO: //free_errors(a)
+			exit_program(NULL, "error: overflow"); //TODO: //free_errors(a)
 		//check duplicate =>if error=>exit
-		if (is_duplicate_error(avs[i]))
-			exit_program(NULL, "error: syntax duplicate"); TODO: //free_errors(a)
+		if (is_duplicate_error(*stack_a,converted_int))
+			exit_program(NULL, "error: syntax duplicate"); //TODO: //free_errors(a)
 		//if no error => append_node
-		*stack_a = append_node(stack_a, converted_int);
+		append_node(stack_a, converted_int);
 		i++;
 	}
 }

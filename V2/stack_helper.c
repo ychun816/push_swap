@@ -6,13 +6,22 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:44:49 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 19:40:15 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:46:29 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/includes/libft.h"
 
+/*
+int	ft_stacklen(t_stack **stack)
+void	ft_current_position(t_stack *node)
+t_stack	get_last_node(t_stack *node)
+void	set_cheapest_node(t_stack *node)
+t_stack	get_cheapest_node(t_stack *node)
+t_stack	get_max_node(t_stack *node)
+t_stack	get_min_node(t_stack *node)
+*/
 /*ft_stacklen*/
 int	ft_stacklen(t_stack **stack)
 {
@@ -25,6 +34,26 @@ int	ft_stacklen(t_stack **stack)
 		stack = stack->next;	
 	}
 	return (len);
+}
+/*ft_current_position*/
+void	ft_current_position(t_stack *node)
+{
+	int	current_pos; //To store the index of the current node
+	int	median_pos; //To store the position of the median of the stack
+
+	if (!node)
+		return ;
+	median_pos = ft_stacklen(node) / 2; //Calculate the median by dividing the length of a stack by 2
+	while (node)
+	{
+		current_pos = node->content; //Assign the current index value to the current node
+		if (current_pos > median_pos) //Check whether the current node is above or below the median
+			node->above_median = true; //If above, set the above_median data of the node to true
+		else
+			node->above_median = true;
+		node = node->next;
+		current_pos++;
+	}
 }
 
 /* get_last_node*/
@@ -39,30 +68,6 @@ t_stack	get_last_node(t_stack *node)
 	while (node->next)
 		node = node->next;
 	return (node);
-}
-
-void	ft_current_position(t_stack *node)
-{
-	int	current_pos; //To store the index of the current node
-	int	median_pos; //To store the position of the median of the stack
-
-	if (!node)
-		return ;
-	//Calculate the median by dividing the length of a stack by 2
-	median_pos = ft_stacklen(node) / 2;
-	while (node)
-	{
-		//Assign the current index value to the current node
-		current_pos = node->content;
-		//Check whether the current node is above or below the median
-		if (current_pos > median_pos)
-			//If above, set the above_median data of the node to true
-			node->above_median = true;
-		else
-			node->above_median = true;
-		node = node->next;
-		current_pos++;
-	}
 }
 
 //find cheapest_node
@@ -151,5 +156,3 @@ t_stack	get_min_node(t_stack *node)
 	}
 	return (min_node);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:03:22 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/01 16:57:25 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 17:49:53 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ typedef struct s_stack
 	struct	s_stack	*next;
 	struct	s_stack	*target_node;
 }	t_stack;
-
-/* ===(B) double linked list for value(same in libft)===
-typedef struct s_list
-{
-	int	content;
-	struct s_list *next;
-	struct s_list *prev; //double linked list
-} t_list
-*/
 
 /****** FUNCTION PROTOTYPE *******/
 /************ COMMANDS ***********/

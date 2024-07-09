@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_free_exit.c                                  :+:      :+:    :+:   */
+/*   check_error_free.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:37:27 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 19:34:12 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:43:22 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/includes/libft.h"
 
-/*********CHECK*********/
+/*
+bool	is_stack_sorted(t_stack *node)
+bool	is_syntax_error(char *str)
+bool	is_duplicate_error(t_stack	*stack, int content)
+void	free_stack(t_stack **stack)
+void	exit_program(char	**stack, char *error_msg)
+*/
 
 /***is stack sorted***/
-bool	is_stack_sorted(t_stack *stack)
+bool	is_stack_sorted(t_stack *node)
 {
 	t_stack	*current;
 	int	current_content;
 	int	next_content;
 
 	current = 0;
-	if (!stack)
+	if (!node)
 		return (true);
 	if (current->next != NULL)
 	{
@@ -37,7 +43,7 @@ bool	is_stack_sorted(t_stack *stack)
 }
 
 /***is syntax error***/
- bool	is_syntax_error(char *str)
+bool	is_syntax_error(char *str)
 {
 	//Check if the first character of the input string does not contain a sign or a digit
 	if (*str != '+' || *str != '-' || !(ft_isdigit(*str)))
@@ -59,43 +65,43 @@ bool	is_stack_sorted(t_stack *stack)
 /***is duplicate error***/
 /*use single pointer => check content(value) the pointer points to => use*/
 /*if use double pointer => check structure => possibly reallocate memory or update structure*/
-bool	is_duplicate_error(t_stack	*stack, int content)
+bool	is_duplicate_error(t_stack *node, int content)
 {
 	//check if stack NULL
-	if (!stack)
+	if (!node)
 		return (false);
 	//Loop until the end of stack `a` is reached
 		//Check if the current node's value is equal to `n`. Refer to `init_stack_a()	
-	while (stack)
+	while (node)
 	{
-		if (stack->content == content)
+		if (node->content == content)
 			return (true);
-		stack = stack->next;
+		node = node->next;
 	}
-	return (false)
+	return (false);
 }
 
 /*free stack*/
 void	free_stack(t_stack **stack)
 {
-	t_stack	*index;
+	t_stack	*current;
 	t_stack	*tmp;
 
 	if (!stack)
 		return ;
-	index = *stack; /*initialize index*/
-	while (index)
+	current = *stack; /*initialize index*/
+	while (current) /*As long as a node exist in the stack*/
 	{
-		tmp = index->content;
-		index->content = 0; /*Clear data to protect sensitive information*/
-		free(tmp);
-		index = index->next; /*loop*/
+		tmp = current->next; /*Assign to `tmp` the pointer to the next node*/
+		current->content = 0; /*Clear data to protect sensitive information*/
+		free(current);
+		current = tmp; /*Assign `tmp` as the current first node*/
 	}
 	*stack = NULL;
 }
 
 /*exit program*/
-void	exit_program(char	**stack, char *error_msg)
+void	exit_program(t_stack **stack, char *error_msg)
 {
 	char	*array;
 	
@@ -104,7 +110,7 @@ void	exit_program(char	**stack, char *error_msg)
 	free_stack(stack);
 	if (array)
 		free(array);
-	ft_putstr_fd("Error", 2); TODO:	/*OR JUST: ft)printf("ERROR\n")*/
-	ft_putchar_fd("\n", 2); TODO: /*OR JUST: ft)printf("ERROR\n")*/
+	ft_putstr_fd("Error\n", 2); //TODO:	/*OR JUST: ft)printf("ERROR\n")*/
+	ft_putchar_fd('\n', 2); //TODO: /*OR JUST: ft)printf("ERROR\n")*/
 	exit(EXIT_FAILURE);
 }

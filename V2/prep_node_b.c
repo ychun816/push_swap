@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_node_b.c                                    :+:      :+:    :+:   */
+/*   prep_node_b.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:20:41 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 19:35:31 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 18:13:37 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/includes/libft.h"
 
+//ft_current_position
 //set target b
-void	set_target_node_b(t_stack *a, t_stack *b)
+static void	set_target_node_b(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
 	t_stack *target_node;
@@ -42,9 +43,9 @@ void	set_target_node_b(t_stack *a, t_stack *b)
 }
 
 //handle_node_b
-t_stack	handle_node_b(t_stack *a, t_stack *b)
+void	prep_node_b(t_stack *a_node, t_stack *b_node)
 {
-	ft_current_position(a);
-	ft_current_position(b);
-	set_target_node_b(a, b);
+	ft_current_position(a_node);
+	ft_current_position(b_node);
+	set_target_node_b(a_node, b_node);
 }

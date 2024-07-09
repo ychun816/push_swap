@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:03:22 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/08 19:33:35 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:48:56 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,56 @@ typedef struct s_stack
 
 /************ FUNCTIONS ***********/
 
-/*basic commands*/
+/***BASIC COMMAND***/
+/*push*/
+static void	push(t_stack **src, t_stack **dest);
+void	pa(t_stack **a, t_stack **b);
+void	pb(t_stack **a, t_stack **b);
+void prep_for_push(t_stack **stack, t_stack *top_node, char stack_name);
+/*swap*/
+static void	swap(t_stack **stack);
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+void	ss(t_stack **a, t_stack **b);
+/*rotate*/
+static void	rotate(t_stack **stack);
+void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+void rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+/*rrotate*/
+static void	rrotate(t_stack **stack);
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
+void	rrotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
 
+/***CHECK ERROR & FREE***/
+/*check error*/
+bool	is_stack_sorted(t_stack *node);
+bool	is_syntax_error(char *str);
+bool	is_duplicate_error(t_stack	*stack, int content);
+/*free and exit*/
+void	free_stack(t_stack **stack);
+void	exit_program(t_stack **stack, char *error_msg);
 
-/*handle error*/
+/***PREP NODE***/
+void	prep_node_a(t_stack *a_node, t_stack *b_node);
+void	prep_node_b(t_stack *a_node, t_stack *b_node);
 
+/***STACK HELPER FUNCTIONS***/
+int	ft_stacklen(t_stack **stack);
+void	ft_current_position(t_stack *node);
+t_stack	get_last_node(t_stack *node);
+void	set_cheapest_node(t_stack *node);
+t_stack	get_cheapest_node(t_stack *node);
+t_stack	get_max_node(t_stack *node);
+t_stack	get_min_node(t_stack *node);
 
-
-/*stack init*/
-/*stack functions*/
-
-/*algo*/
-sort_three
-sort_big
-
-
+/***SORT STACK***/
+/*sort stack small3*/
+void	sort_stack_small_3(t_stack **stack);
+/*sort stack big*/
+void sort_stack_big(t_stack * *a, t_stack * *b);
 
 #endif
