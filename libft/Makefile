@@ -6,23 +6,40 @@
 #    By: yilin <yilin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 11:22:23 by yilin             #+#    #+#              #
-#    Updated: 2024/07/04 11:41:53 by yilin            ###   ########.fr        #
+#    Updated: 2024/07/10 20:59:16 by yilin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COLOR_PINKB = \033[1;95m
-COLOR_REDB = \033[1;91m
-COLOR_RESET = \033[0m
+# **************************************************************************** #
+#                              COLOR SETTING                                   #
+# **************************************************************************** #
 
-### LIB NAME ###
+COLOR_RESET = \033[0m
+PINKB = \033[1;95m
+REDB = \033[1;91m
+ROSEB = \033[1;38;5;225m
+BLUEB = \033[1;34m
+GREENB = \033[1;38;5;85m
+PURPLEB = \033[1;38;5;55m
+
+# **************************************************************************** #
+#                                 MAIN                                         #
+# **************************************************************************** #
+
 NAME = libft.a
 
-### DIRECTORY ###
+# **************************************************************************** #
+#                               DIRECTORIES                                    #
+# **************************************************************************** #
+
 HEADER = -I includes/
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
 
-### SRCS FILES ###
+# **************************************************************************** #
+#                         SRCS, OBJS, DEPENTDENCIES                            #
+# **************************************************************************** #
+
 ARRAY_DIR  = $(SRCS_DIR)ft_array/ft_split.c \
              $(SRCS_DIR)ft_array/ft_strchr.c \
              $(SRCS_DIR)ft_array//ft_strdup.c \
@@ -71,7 +88,6 @@ TO_DIR     = $(SRCS_DIR)ft_to/ft_atoi.c \
              $(SRCS_DIR)ft_to/ft_itoa.c \
              $(SRCS_DIR)ft_to/ft_tolower.c \
              $(SRCS_DIR)ft_to/ft_toupper.c
-#int	ft_atol.c
 
 PRINTF_DIR = $(SRCS_DIR)ft_printf/ft_printf.c \
              $(SRCS_DIR)ft_printf/ft_put_char.c \
@@ -83,38 +99,46 @@ PRINTF_DIR = $(SRCS_DIR)ft_printf/ft_printf.c \
 
 GNL_DIR    = $(SRCS_DIR)get_next_line/get_next_line.c
 
-### COMBINE ALL SRCS FILES ###
 SRCS       = $(ARRAY_DIR) $(IS_DIR) $(LST_DIR) $(MEM_DIR) $(PUTFD_DIR) $(TO_DIR) $(PRINTF_DIR) $(GNL_DIR)
 OBJS       = $(patsubst $(SRCS_DIR)%.c,$(OBJS_DIR)%.o,$(SRCS))
 
-### COMPILE & FLAGS ###
+# **************************************************************************** #
+#                            COMPILER & FLAGS                                  #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -rf
 
-###### BUILD COMMANDS ######
+# **************************************************************************** #
+#                             BUILD COMMANDS                                   #
+# **************************************************************************** #
+
 all: $(NAME)
-	@echo "$(COLOR_PINKB)🦄ALL DONE🦄$(COLOR_RESET)"
+	@echo "$(PURPLEB)✨COMPILATION DONE!$(NAME) CREATED✨$(COLOR_RESET)"
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
-	@echo "$(COLOR_PINKB)✨COMPILATION DONE✨$(COLOR_RESET)"
+	@echo "$(BLUEB)---COMPILING--- $(NAME)$(COLOR_RESET)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
-###### CLEAN COMMANDS ######
+# **************************************************************************** #
+#                             CLEAN COMMANDS                                   #
+# **************************************************************************** #
+
 clean:
 	@$(RM) $(OBJS_DIR)
-	@echo "$(COLOR_PINKB)🫧 CLEAN DONE!!OBJS DELETED🫧$(COLOR_RESET)"
+	@echo "$(BLUEB)🫧CLEAN DONE! [$(OBJS)] DELETED🫧$(COLOR_RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(COLOR_PINKB)🫧🫧 FCLEAN DONE!!LIBFT.A DELETED🫧🫧$(COLOR_RESET)"
+	@echo "$(BLUEB)🫧🫧FCLEAN DONE! [$(NAME)] REMOVED🫧🫧$(COLOR_RESET)"
 
 re: fclean all
-	@echo "$(COLOR_PINKB)RE DONE$(COLOR_RESET)"
+	@echo "$(REDB)RE DONE$(COLOR_RESET)"
 
 .PHONY: all clean fclean re
