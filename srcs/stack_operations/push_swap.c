@@ -6,40 +6,58 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:39:11 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/10 20:39:11 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 17:15:35 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//#include "libft/includes/libft.h"
+
+static void	start_sort(t_stack **a, t_stack **b)
+{
+	if (ft_stacklen(*a) <= 5)
+		sort_stack_small(a, b, ft_stacklen(*a));
+	else
+		sort_stack_big(a, b, ft_stacklen(*a));
+}
 
 int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int	stack_len;
+	char	**split_avs;
 
 	a = NULL;
 	b = NULL;
-	stack_len = 0;
-	/*check input*/
-	if (ac == 1 || (ac == 2 && !av[1][0]))
-		exit_program((t_stack **)av, "wrong!"); //or return(1) /*or exit(EXIT_FAILURE)? //exit program => put error*/
+	if (ac <= 1 || (ac == 2 && !av[1][0]) || (ac == 2
+	&& (av[1][0] == ' ' && av[1][1] == '\0')))
+		return (EXIT_FAILURE);
 	else if (ac == 2)
-		av = ft_split(av[1], ' ');
-	avs_to_stack_a(&a, (av + 1)); //Initiate stack `a`, which also handles errors //+1 => skip a.out
-	if (!is_stack_sorted(a)) /*check if stack a in order => no need sort => free*/
 	{
-		//If not, and there are two numbers, swap the first two nodes
-		if (stack_len == 2)
-			sa(&a);
-		//If not, and there are three numbers, call the sort three algorithm
-		if (stack_len == 3)
-			sort_stack_3small(&a);
-		//If not, and there are more than three numbers, call the sort stacks algorithm
-		else
-			sort_stack_big(&a, &b);
+		split_avs = ft_split(av[1], ' ');
+		if (!split_avs)
+			return (EXIT_FAILURE);
+		av = split_avs;
 	}
-	free_stack(&a); // Exit the program with a status of 1 (successful completion)
-	return (0);
+	if (check_av_input(ac, av) == NULL)
+		return (EXIT_FAILURE);
+	avs_to_stack_a(&a, ac, av);
+	if (!is_stack_to_sort(a))
+		start_sort(&a, &b);
+	clear_both_stacks(&a, &b);
+	if (ac == 2)
+		free_strs(av);
+	return (EXIT_SUCCESS);
 }
+/*
+void	print_result(t_stack *a)
+{
+	t_stack *stack;
+
+	stack = a;
+	while (stack)
+	{
+		ft_printf("%d\n", stack->content);
+		stack = stack->next;
+	}
+}
+*/

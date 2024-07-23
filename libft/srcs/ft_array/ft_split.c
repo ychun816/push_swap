@@ -6,102 +6,190 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:48:00 by yilin             #+#    #+#             */
-/*   Updated: 2024/05/26 19:51:29 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:38:47 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*#include <stdlib.h>*/
-
-static void	ft_free_strs(char **strs, int count)
+static void	ft_free_all(char **arr, int j)
 {
 	int	i;
 
 	i = 0;
-	while (i < count)
-	{
-		free((char *)strs[i]);
-		i++;
-	}
-	free((char **)strs);
+	while (i < j)
+		free(arr[i++]);
+	free(arr);
 }
 
-static int	ft_wordcount(char const *str, char c)
+static char	*ft_strchop(char const *s, int start, int end)
 {
-	int	wordlen;
-	int	in_word;
+	char	*str;
 
-	wordlen = 0;
-	in_word = 0;
-	while (*str)
-	{
-		if (*str != c && !in_word)
-		{
-			in_word = 1;
-			wordlen++;
-		}
-		else if (*str == c)
-		{
-			in_word = 0;
-		}
-		str++;
-	}
-	return (wordlen);
+	str = (char *)malloc((end - start) * sizeof(char));
+	if (!str)
+		return (0);
+	ft_strlcpy(str, s + start + 1, end - start);
+	return (str);
 }
 
-static char	*ft_stralloc(char const *str, char c, int *end_pos)
+static int	ft_assign_arr(char **arr, char const *s, char c, int s_len)
 {
-	char	*total_word;
-	int		start_pos;
-	int		i;
+	int	i;
+	int	j;
+	int	anchor;
 
-	i = 0;
-	start_pos = *end_pos;
-	while (str[start_pos] && str[start_pos] == c)
-		start_pos++;
-	while (str[start_pos + i] && str[start_pos + i] != c)
-		i++;
-	total_word = (char *)malloc((i + 1) * sizeof(char));
-	if (!total_word)
-		return (NULL);
-	i = 0;
-	while (str[start_pos] && str[start_pos] != c)
+	i = -1;
+	j = 0;
+	anchor = i;
+	while (++i <= s_len)
 	{
-		total_word[i++] = str[start_pos++];
+		if (s[i] == c || !s[i])
+		{
+			if (i - anchor > 1)
+			{
+				arr[j] = ft_strchop(s, anchor, i);
+				if (!arr[j++])
+				{
+					ft_free_all(arr, j - 1);
+					return (0);
+				}
+			}
+			anchor = i;
+		}
 	}
-	total_word[i] = '\0';
-	*end_pos = start_pos;
-	return (total_word);
+	arr[j] = 0;
+	return (1);
+}
+
+static int	ft_count_subset(char const *s, char c, int s_len)
+{
+	int	i;
+	int	cnt;
+	int	anchor;
+
+	i = -1;
+	cnt = 0;
+	anchor = i;
+	while (++i <= s_len)
+	{
+		if (s[i] == c || !s[i])
+		{
+			if (i - anchor > 1)
+				cnt++;
+			anchor = i;
+		}
+	}
+	return (cnt);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**sub_strs;
-	int		i;
-	int		pos;
-	int		wordlen;
+	char	**arr;
+	int		s_len;
+	int		n_subset;
 
-	i = 0;
-	pos = 0;
-	wordlen = ft_wordcount(s, c);
-	sub_strs = (char **)malloc((wordlen + 1) * sizeof(char *));
-	if (!sub_strs)
-		return (NULL);
-	while (i < wordlen)
-	{
-		sub_strs[i] = ft_stralloc(s, c, &pos);
-		if (!sub_strs[i])
-		{
-			ft_free_strs(sub_strs, i);
-			return (NULL);
-		}
-		i++;
-	}
-	sub_strs[i] = NULL;
-	return (sub_strs);
+	s_len = (int)ft_strlen(s);
+	n_subset = ft_count_subset(s, c, s_len);
+	arr = (char **)malloc((n_subset + 1) * sizeof(char *));
+	if (!arr)
+		return (0);
+	if (ft_assign_arr(arr, s, c, s_len) == 0)
+		return (0);
+	return (arr);
 }
-/*
+// ===MINE====
+// static void	ft_free_strs(char **strs, int count)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!strs)
+// 		return;
+// 	while (i < count)
+// 	{
+// 		free((char *)strs[i]);
+// 		i++;
+// 	}
+// 	free((char **)strs);
+// }
+
+// static int	ft_wordcount(char const *str, char c)
+// {
+// 	int	wordlen;
+// 	int	in_word;
+
+// 	wordlen = 0;
+// 	in_word = 0;
+// 	while (*str)
+// 	{
+// 		if (*str != c && !in_word)
+// 		{
+// 			in_word = 1;
+// 			wordlen++;
+// 		}
+// 		else if (*str == c)
+// 		{
+// 			in_word = 0;
+// 		}
+// 		str++;
+// 	}
+// 	return (wordlen);
+// }
+
+// static char	*ft_stralloc(char const *str, char c, int *end_pos)
+// {
+// 	char	*total_word;
+// 	int		start_pos;
+// 	int		i;
+
+// 	i = 0;
+// 	start_pos = *end_pos;
+// 	while (str[start_pos] && str[start_pos] == c)
+// 		start_pos++;
+// 	while (str[start_pos + i] && str[start_pos + i] != c)
+// 		i++;
+// 	total_word = (char *)malloc((i + 1) * sizeof(char));
+// 	if (!total_word)
+// 		return (NULL);
+// 	i = 0;
+// 	while (str[start_pos] && str[start_pos] != c)
+// 	{
+// 		total_word[i++] = str[start_pos++];
+// 	}
+// 	total_word[i] = '\0';
+// 	*end_pos = start_pos;
+// 	return (total_word);
+// }
+
+// char	**ft_split(char const *s, char c)
+// {
+// 	char	**sub_strs;
+// 	int		i;
+// 	int		pos;
+// 	int		wordlen;
+
+// 	i = 0;
+// 	pos = 0;
+// 	wordlen = ft_wordcount(s, c);
+// 	sub_strs = (char **)malloc((wordlen + 1) * sizeof(char *));
+// 	if (!sub_strs)
+// 		return (NULL);
+// 	while (i < wordlen)
+// 	{
+// 		sub_strs[i] = ft_stralloc(s, c, &pos);
+// 		if (!sub_strs[i])
+// 		{
+// 			ft_free_strs(sub_strs, i);
+// 			return (NULL);
+// 		}
+// 		i++;
+// 	}
+// 	sub_strs[i] = NULL;
+// 	return (sub_strs);
+// }
+
+/*OTHERS
 #include <stdio.h>
 int	main(int ac, char *av[])
 {

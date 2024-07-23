@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"stdbool.h": "c",
-		"stdio.h": "c",
-		"errno.h": "c",
-		"cstdlib": "c"
-	}
-}

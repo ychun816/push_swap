@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:03:22 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/10 20:41:23 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 17:06:04 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 # include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <limits.h>
 # include <stdbool.h>
-# include <stdio.h>
+# include <errno.h>
 
-/************ STRUCTURE ***********/
+/* ************************************************************************** */
+/*                                STRUCTURE                                   */
+/* ************************************************************************** */
+
 typedef enum e_error
 {
 	FALSE = 1,
@@ -30,67 +34,80 @@ typedef enum e_error
 
 typedef struct s_stack
 {
-	int	content;  //The number to sort
-	int	position_index; //The number's position in the stack
-	int	push_cost; //How many commands in total
-	bool	above_median; /*median 中位数*/ //Used to calculate `push_cost`
-	bool	cheapest; //The node that is the cheapest to do commands
-	struct	s_stack *prev;
-	struct	s_stack	*next;
-	struct	s_stack	*target_node;
+	int				content;
+	int				pos_ind;
+	// int				push_cost;
+	// bool			above_median;
+	bool			cheapest;
+	struct s_stack	*prev;
+	struct s_stack	*next;
+	struct s_stack	*target;
 }	t_stack;
 
-/************ FUNCTIONS ***********/
+/* ************************************************************************** */
+/*                                FUNCTIONS                                   */
+/* ************************************************************************** */
 
-/***BASIC COMMAND***/
-/*push*/
-// static void	push(t_stack **src, t_stack **dest);
+/********** BASIC COMMAND **********/
+/*PUSH*/
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **a, t_stack **b);
-void prep_for_push(t_stack **stack, t_stack *top_node, char stack_name);
-/*swap*/
-// static void	swap(t_stack **stack);
+/*SWAP*/
 void	sa(t_stack **a);
 void	sb(t_stack **b);
 void	ss(t_stack **a, t_stack **b);
-/*rotate*/
-// static void	rotate(t_stack **stack);
-void	ra(t_stack **a);
-void	rb(t_stack **b);
-void	rr(t_stack **a, t_stack **b);
-void rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
-/*rrotate*/
-// static void	rrotate(t_stack **stack);
-void	rra(t_stack **a);
-void	rrb(t_stack **b);
-void	rrr(t_stack **a, t_stack **b);
-void	rrotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+/*ROTATE*/
+void	ra(t_stack **a, int repeat);
+void	rb(t_stack **b, int repeat);
+void	rr(t_stack **a, t_stack **b, int repeat);
+void	rotate_both(t_stack **a, t_stack **b, int repeat_a, int repeat_b);
+/*RROTATE*/
+void	rra(t_stack **a, int repeat);
+void	rrb(t_stack **b, int repeat);
+void	rrr(t_stack **a, t_stack **b, int repeat);
+void	rrotate_both(t_stack **a, t_stack **b, int repeat_a, int repeat_b);
 
-/***CHECK ERROR & FREE***/
-/*check error*/
-bool	is_stack_sorted(t_stack *node);
-bool	is_syntax_error(char *str);
-bool	is_duplicate_error(t_stack	*stack, int content);
-/*free and exit*/
-void	free_stack(t_stack **stack);
-void	exit_program(t_stack **stack, char *error_msg);
+/********** SORT **********/
+/*SORT SMALL*/
+void	check_pushback_b2a(t_stack **b, t_stack **a);
+void	sort_stack_3nodes(t_stack **a);
+void	sort_stack_small(t_stack **a, t_stack **b, int n_nodes);
+/*SORT BIG*/
+void	sort_stack_a(t_stack **a);
+void	sort_stack_big(t_stack **a, t_stack **b, int a_len);
+/*CHECK CHEAP A2B*/
+int		ft_target_a2b(t_stack *node, int ref);
+int		cal_steps_a2b(t_stack *a, int a_pos, int b_len, t_stack *b);
+int		find_cheapest_a2b(t_stack *a, int a_len, t_stack *b);
+void	check_cheap_a2b(t_stack **from, int size, t_stack **to, int to_size);
+/*CHECK CHEAP B2A*/
+int		ft_target_b2a(t_stack *node, int ref);
+int		cal_steps_b2a(t_stack *b, int pos, int b_len, t_stack *a);
+int		find_cheapest_b2a(t_stack *b, int b_len, t_stack *a);
+void	check_cheap_b2a(t_stack **from, int size, t_stack **to, int to_size);
+/*TARGET HELPER*/
+int		get_pos(t_stack *node, int target);
+int		ft_bigger(int x, int y);
+int		ft_smaller(int x, int y);
+bool	is_stack_to_rotate(t_stack *node, int target_content);
 
-/***PREP NODE***/
-void	prep_node_a(t_stack *a_node, t_stack *b_node);
-void	prep_node_b(t_stack *a_node, t_stack *b_node);
-
-/***STACK HELPER FUNCTIONS***/
-int	ft_stacklen(t_stack *node);
-void	ft_current_position(t_stack *node);
-t_stack	*get_last_node(t_stack *node);
-void	set_cheapest_node(t_stack *node);
-t_stack	*get_cheapest_node(t_stack *node);
-t_stack	*get_max_node(t_stack *node);
-t_stack	*get_min_node(t_stack *node);
-
-/***SORT STACK***/
-void	avs_to_stack_a(t_stack	**stack_a, char **avs);
-void	sort_stack_3small(t_stack **stack);
-void sort_stack_big(t_stack * *a, t_stack * *b);
+/********** STACK OPERATIONS **********/
+/*AVS PUT TO STACK*/
+void	avs_to_stack_a(t_stack	**a, int ac, char **av);
+/*CHECK ERROR*/
+char	**check_av_input(int ac, char **av);
+bool	is_stack_to_sort(t_stack *node);
+bool	is_stack_to_rotate(t_stack *node, int target_content);
+/*CLEANUP FUNCTION*/
+void	clear(void *content);
+void	clear_stack(t_stack **stack, void (*clear)(void *));
+void	clear_both_stacks(t_stack **a, t_stack **b);
+void	free_strs(char **strs);
+/*STACK HELPER*/
+int		ft_stacklen(t_stack *node);
+void	ft_stackadd_back(t_stack **stack, t_stack *new_node);
+int		get_content(t_stack *node);
+int		get_max_content(t_stack *node);
+int		get_min_content(t_stack *node);
 
 #endif

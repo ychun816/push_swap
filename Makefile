@@ -6,7 +6,7 @@
 #    By: yilin <yilin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 12:11:58 by yilin             #+#    #+#              #
-#    Updated: 2024/07/10 20:57:50 by yilin            ###   ########.fr        #
+#    Updated: 2024/07/23 16:14:32 by yilin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,15 @@ PUSH_SWAP_SRCS = commands/cmd_push\
 				 commands/cmd_rrotate\
 				 commands/cmd_swap\
 				 stack_operations/avs_to_stack_a\
-				 stack_operations/check_error_free\
-			 	 stack_operations/prep_node_a\
-				 stack_operations/prep_node_b\
+				 stack_operations/check_error\
+				 stack_operations/cleanup_function\
 				 stack_operations/push_swap\
 				 stack_operations/stack_helper\
-				 sort/sort_stack_3small\
+				 sort/check_cheap_a2b\
+				 sort/check_cheap_b2a\
 				 sort/sort_stack_big\
+				 sort/sort_stack_small\
+				 sort/target_helper
 
 PUSH_SWAP_FILES = $(addsuffix .c, $(PUSH_SWAP_SRCS))
 SRCS = $(addprefix $(SRCS_DIR), $(PUSH_SWAP_FILES))
@@ -91,14 +93,6 @@ $(NAME): $(OBJS) $(LIBFT_A)
 
 $(LIBFT_A):
 	@make -C $(LIBFT)
-
-# $(OBJS_DEPS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADER) | $(OBJS_DEPS_DIR)
-# 	@mkdir -p $(OBJS_DEPS_DIR)
-# 	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
-# 	@echo "$(GREENB)COMPILING $< TO $@$(COLOR_RESET)"
-
-# $(OBJS_DEPS_DIR):
-# 	@mkdir -p $(OBJS_DEPS_DIR)
 
 # **************************************************************************** #
 #                             CLEAN COMMANDS                                   #

@@ -6,21 +6,13 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 12:07:01 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/10 20:31:10 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:40:30 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//#include "libft/includes/libft.h"
-/*
-static void	rrotate(t_stack **stack)
-void	rra(t_stack **a)
-void	rrb(t_stack **b)
-void	rrr(t_stack **stack)
-void	rrotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
-*/
 
-
+/*rrotate (reverse rotate)*/
 /*
 (1)Get last_node
 Head                  last_node => get_last_node(**stack)
@@ -41,59 +33,71 @@ NULL <-> [D] <-> [A] <-> [B] <-> [C] <-> NULL
 Head
  ↓
 [D] <-> [A] <-> [B] <-> [C]
-
 */
 static void	rrotate(t_stack **stack)
 {
-	t_stack *last_node;
+	t_stack	*last_node;
+	t_stack	*second_last_node;
 
 	if (!(*stack) ||!(*stack)->next)
 		return ;
-	last_node = get_last_node(*stack);
-	//Detaching the Last Node
-	(last_node->prev)->next = NULL;
-	//Link last_node to front
+	last_node = *stack;
+	while (last_node->next)
+	{
+		second_last_node = last_node;
+		last_node = last_node->next;
+	}
+	second_last_node->next = NULL;
 	last_node->next = *stack;
 	last_node->prev = NULL;
-	//update *stack to point to the new node; otherwise it points to old node
+	(*stack)->prev = last_node;
 	*stack = last_node;
-	//update prev pointer; otherwise it still points to NULL => break the link
-	(last_node->next)->prev = last_node;
 }
 
-//rra: last node become first
-void	rra(t_stack **a)
+/*rra: last node become first*/
+void	rra(t_stack **a, int repeat)
 {
+	if (!(*a) || !repeat)
+		return ;
 	rrotate(a);
-	ft_printf("rra\n");
+	ft_putstr_fd("rra\n", STDOUT_FILENO);
+	rra(a, repeat - 1);
 }
 
-//rrb: last node become first
-void	rrb(t_stack **b)
+/*rrb: last node become first*/
+void	rrb(t_stack **b, int repeat)
 {
+	if (!(*b) || !repeat)
+		return ;
 	rrotate(b);
-	ft_printf("rrb\n");
+	ft_putstr_fd("rrb\n", STDOUT_FILENO);
+	rrb(b, repeat - 1);
 }
 
-//rrr: rra and rrb at the same time
-void	rrr(t_stack **a, t_stack **b)
+/*rrr: rra and rrb at the same time*/
+void	rrr(t_stack **a, t_stack **b, int repeat)
 {
+	if (!(*a) || !(*b) || !repeat)
+		return ;
 	rrotate(a);
 	rrotate(b);
-	ft_printf("rrr\n");
+	ft_putstr_fd("rrr\n", STDOUT_FILENO);
+	rrr(a, b, repeat - 1);
 }
 
-//rrotate both:
+/*rrotate both*/
 /*rotates both the bottom `a` and `b` nodes to the top of their stacks, 
   if it's the cheapest move*/
-void	rrotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+void	rrotate_both(t_stack **a, t_stack **b, int repeat_a, int repeat_b)
 {
-	//As long as the current `b` node is not `a` cheapest node's target node
-	//and the current `a` node is not the cheapest
-	while(*a != cheapest_node && *b != cheapest_node->target_node)
+	if (repeat_a > repeat_b)
 	{
-		rrr(a, b);
-		ft_current_position(*a);
-		ft_current_position(*b);
-	} 
+		rrr(a, b, repeat_b);
+		rra(a, repeat_a - repeat_b);
+	}
+	else
+	{
+		rrr(a, b, repeat_a);
+		rrb(b, repeat_b - repeat_a);
+	}
 }

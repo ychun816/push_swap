@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 15:48:43 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/23 16:39:59 by yilin            ###   ########.fr       */
+/*   Created: 2024/07/17 17:29:51 by yilin             #+#    #+#             */
+/*   Updated: 2024/07/23 16:34:07 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_list	*temp;
+	int	i;
 
-	if (!lst || !new)
-		return ;
-	if (!(*lst))
+	i = 0;
+	while (s1[i])
 	{
-		*lst = new;
-		return ;
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	temp = *lst;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	return (s1[i] - s2[i]);
 }
-/*
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*temp;
-
-	if (!lst || !new)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	temp = *lst;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
-}*/

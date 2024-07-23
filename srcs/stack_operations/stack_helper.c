@@ -6,22 +6,12 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:44:49 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/10 20:32:36 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:52:39 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//#include "libft/includes/libft.h"
 
-/*
-int	ft_stacklen(t_stack *node)
-void	ft_current_position(t_stack *node)
-t_stack	*get_last_node(t_stack *node)
-void	set_cheapest_node(t_stack *node)
-t_stack	*get_cheapest_node(t_stack *node)
-t_stack	*get_max_node(t_stack *node)
-t_stack	*get_min_node(t_stack *node)
-*/
 /*ft_stacklen*/
 int	ft_stacklen(t_stack *node)
 {
@@ -31,128 +21,87 @@ int	ft_stacklen(t_stack *node)
 	while (node)
 	{
 		len++;
-		node = node->next;	
+		node = node->next;
 	}
 	return (len);
 }
-/*ft_current_position*/
-void	ft_current_position(t_stack *node)
-{
-	int	current_pos; //To store the index of the current node
-	int	median_pos; //To store the position of the median of the stack
 
-	if (!node)
-		return ;
-	median_pos = ft_stacklen(node) / 2; //Calculate the median by dividing the length of a stack by 2
-	while (node)
-	{
-		current_pos = node->content; //Assign the current index value to the current node
-		if (current_pos > median_pos) //Check whether the current node is above or below the median
-			node->above_median = true; //If above, set the above_median data of the node to true
-		else
-			node->above_median = true;
-		node = node->next;
-		current_pos++;
-	}
-}
-
-/* get_last_node*/
+/*ft_stackadd_back*/
 /*
-stack structure:
-head -> [data | next] -> [data | next] -> [data | NULL]
+- If the new node is NULL, do nothing.
+- If the list is empty, set the new node as the head.
+- Start from the head of the list.
+- Traverse to the last node.
+- Set the previous pointer of the new node to the last node.
+- Set the next pointer of the last node to the new node.
 */
-t_stack	*get_last_node(t_stack *node)
+void	ft_stackadd_back(t_stack **stack, t_stack *new_node)
 {
-	if (!node)
-		return (NULL);
-	while (node->next)
-		node = node->next;
-	return (node);
-}
+	t_stack	*tmp_node;
 
-//find cheapest_node
-void	set_cheapest_node(t_stack *node)
-{
-	long	cheapest_content;
-	t_stack	*cheapest_node; 
-	
-	if (!node)
+	if (!new_node)
 		return ;
-	cheapest_content = LONG_MAX; //Assign the biggest `long` as the cheapest value so far
-	cheapest_node = NULL;
-	while (node)
+	if (!(*stack))
 	{
-		if (node->push_cost < cheapest_content)
-		{
-			cheapest_content = node->push_cost;
-			cheapest_node = node;	
-		}
-		node = node->next;
+		*stack = new_node;
+		return ;
 	}
-	//sets a flag (cuz in structure: boolean cheapest to true, indicating that this node is the "cheapest".
-	cheapest_node->cheapest = true;
+	tmp_node = *stack;
+	while (tmp_node->next)
+		tmp_node = tmp_node->next;
+	new_node->prev = tmp_node;
+	tmp_node->next = new_node;
 }
 
-//get_cheapest_node //
-t_stack	*get_cheapest_node(t_stack *node)
+/*get content*/
+int	get_content(t_stack *node)
 {
-	if (!node)
-		return (NULL);
-	while (node)
-	{
-		if (node->cheapest)
-			return (node);
-		node = node->next;
-	}
-	return (NULL);
+	if (node == NULL)
+		exit(EXIT_FAILURE);
+	return (node->content);
 }
 
-/*find_max_node*/
-t_stack	*get_max_node(t_stack *node)
+/*get_max_content*/
+/*
+- Return the minimum integer value if the list is empty
+- Initialize max with the content of the first node
+- Check if the current node value is larger than the max so far
+- Update the max value so far
+*/
+int	get_max_content(t_stack *node)
 {
-	long	max_content;
-	t_stack	*max_node;
-	
-	//check if node null
+	int	max_content;
+	int	current_content;
+
 	if (!node)
-		return (NULL);
-	//assign max to LONG_MIN(max value) 
-	//=> ensure any content in stack node will be larger than this initial value
-	//=>allowing the first node's value to become the new maximum if the list is not empty
-	max_content = LONG_MIN;
-	max_node = NULL;
-	//loop to find max
+		return (INT_MIN);
+	max_content = node->content;
 	while (node)
 	{
-		//Check if the current node value is smaller than the biggest so far
-		if (node->content > max_content)
-		{
-			max_content = node->content; //update the biggest number so far
-			max_node = node;
-		}
+		current_content = node->content;
+		if (current_content > max_content)
+			max_content = current_content;
 		node = node->next;
 	}
-	return (max_node);
+	return (max_content);
 }
 
-//find min node
-t_stack	*get_min_node(t_stack *node)
+/*get_min_content*/
+/*Return the maximum integer value if the list is empty*/
+int	get_min_content(t_stack *node)
 {
-	long	min_content;
-	t_stack	*min_node;
-	
+	int	min_content;
+	int	current_content;
+
 	if (!node)
-		return (NULL);
-	min_content = LONG_MAX;
-	min_node = NULL;
+		return (INT_MAX);
+	min_content = node->content;
 	while (node)
 	{
-		if (node->content < min_content)
-		{
-			min_content = node->content;
-			min_node = node;
-		}
+		current_content = node->content;
+		if (current_content < min_content)
+			min_content = current_content;
 		node = node->next;
 	}
-	return (min_node);
+	return (min_content);
 }
