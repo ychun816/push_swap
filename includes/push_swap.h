@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:03:22 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/23 17:06:04 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 19:27:26 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ typedef struct s_stack
 {
 	int				content;
 	int				pos_ind;
-	// int				push_cost;
-	// bool			above_median;
-	bool			cheapest;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 	struct s_stack	*target;

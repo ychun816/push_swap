@@ -6,7 +6,7 @@
 /*   By: yilin <yilin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:59:54 by yilin             #+#    #+#             */
-/*   Updated: 2024/07/23 17:04:37 by yilin            ###   ########.fr       */
+/*   Updated: 2024/07/23 19:27:48 by yilin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ static void	append_node(t_stack **stack, int content)
 - clears the entire stack if node creation fails.
 - Add the new node to the stack*/
 void	avs_to_stack_a(t_stack	**a, int ac, char **split_avs)
-		// void (*clear)(void *)
 {
 	int		i;
 	int		content;
-	// t_stack	*tmp_node;
 
 	i = 0;
 	if (ac != 2)
@@ -88,13 +86,6 @@ void	avs_to_stack_a(t_stack	**a, int ac, char **split_avs)
 	while (split_avs[i])
 	{	
 		content = ft_atoi(split_avs[i]);
-		// tmp_node = add_new_node(content);
-		// if (!tmp_node)
-		// {
-		// 	clear(split_avs[i]);
-		// 	clear_stack(a, clear);
-		// 	return ;
-		// }
 		append_node(a, content);
 		i++;
 	}
